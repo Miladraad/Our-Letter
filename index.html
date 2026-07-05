@@ -1,0 +1,29 @@
+<!DOCTYPE html><html lang="fa" dir="rtl"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>A Letter Awaits You</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500&display=swap" rel="stylesheet"><style>
+*{margin:0;padding:0;box-sizing:border-box}html,body{width:100%;height:100%;overflow:hidden;background:#000;color:#fff;font-family:Vazirmatn,sans-serif}body{display:flex;justify-content:center;align-items:center}#intro{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:24px;background:#000;transition:1.2s}#intro.fade{opacity:0;pointer-events:none}h1{font-size:clamp(28px,5vw,48px);font-weight:300}input{width:min(320px,80vw);background:transparent;border:1px solid #666;color:#fff;padding:15px;text-align:center}button{padding:12px 30px}#scene{position:absolute;inset:0;display:flex;justify-content:center;align-items:center;perspective:1800px;opacity:0;transition:1.5s}#scene.show{opacity:1}.envelope{position:relative;width:min(420px,88vw);height:270px;cursor:pointer}.body,.flap{position:absolute;inset:0}.body{background:#d6d1c6}.flap{background:#c7c1b5;clip-path:polygon(0 0,100% 0,50% 58%);transform-origin:top;transition:1.4s}.open .flap{transform:rotateX(-180deg)}.letter{position:absolute;left:50%;top:20px;transform:translateX(-50%);width:88%;height:390px;background:#f4eddc;color:#333;padding:35px;transition:1.8s;overflow:auto}.envelope:not(.open) .letter{transform:translateX(-50%) translateY(150px)}.envelope.open .letter{transform:translateX(-50%) translateY(-170px)}.paper{white-space:pre-wrap;line-height:2}.cursor{display:inline-block;width:2px;background:#444;animation:b .8s infinite}@keyframes b{50%{opacity:0}}audio{width:100%;margin-top:20px}
+</style></head><body><div id=intro><h1>A letter awaits you</h1><input id=password type=password placeholder="Enter the key"><button onclick=unlock()>OPEN</button><div id=error></div></div><div id=scene><div class=envelope id=envelope><div class=letter><div class=paper id=paper></div><audio controls><source src="music.mp3" type="audio/mpeg"></audio></div><div class=body></div><div class=flap></div></div></div><script>
+const correctKey="2112";
+const text=`کیانا جان،
+
+با خودم خلوت کردم.
+هی برگشتم به گذشته و به اتفاق‌هایی که بینمون افتاد فکر کردم.
+نه برای اینکه خودمو سرزنش کنم یا گذشته رو عوض کنم؛ فقط برای اینکه بفهمم کجاها می‌تونستم بهتر باشم.
+راستش هرچی بیشتر فکر کردم، بیشتر فهمیدم جاهایی کم گذاشتم و اون‌طور که باید حواسم به تو و حالِ رابطه‌مون نبود.
+دلم می‌خواست اینو بهت بگم که از اون اتفاق‌های کوچیک، ساده رد نشدم.
+خیلی چیزا بهم یاد داد و باعث شد بیشتر خودمو بشناسم.
+بابت ناراحتی‌هایی که از طرف من کشیدی، واقعاً متأسفم.
+هنوزم فکر می‌کنم بعضی چیزها ارزش جنگیدن ندارن؛ ارزش ساختن دارن.
+اگه خواستی، من دوست دارم این دفعه با درک بیشتر، صبوری بیشتر و آدمِ بهتری بودن، دوباره کنار هم برای رابطه‌مون تلاش کنیم.
+خوشحالم که بودنِ تو چیزهای مهمی بهم یاد داد.
+
+«هر کجا ویران بود، آن‌جا امیدِ گنج هست
+گنجِ حق را می‌نجوی؟ در ویرانی طلب.»
+
+با آرزوی روزای خوب برای تو 🌹
+
+دوستدارت از قدیم
+میلاد`;
+function unlock(){if(password.value!==correctKey){error.innerText="Wrong key";return;}intro.classList.add("fade");setTimeout(()=>scene.classList.add("show"),900)}
+let opened=false;envelope.onclick=()=>{if(opened)return;opened=true;envelope.classList.add("open");setTimeout(typeWriter,1500)}
+function typeWriter(){let i=0;const t=paper;const c=document.createElement("span");c.className="cursor";t.appendChild(c);(function f(){if(i<text.length){c.insertAdjacentText("beforebegin",text[i++]);setTimeout(f,38)}else c.remove()})()}
+password.onkeypress=e=>{if(e.key==="Enter")unlock()}
+</script></body></html>
